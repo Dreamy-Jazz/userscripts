@@ -8,24 +8,24 @@ $(document).ready(function() {
 	'mediawiki.api',
 	'mediawiki.util',
 ] ).then( async () => {
-  if (mw.config.get('wgPageName').startsWith('Category:Wikipedia_sockpuppets_of') || mw.config.get('wgPageName').startsWith('Category:Suspected_Wikipedia_sockpuppets_of')) {
-    $("div#mw-pages a[href^='/wiki/User:']").each(async function (index, element) {
-		let text = $(element).text().replace("User:", "");
-		if (mw.util.isIPAddress(text)) {
-		  text = "{{checkip|" + text + "}}";
-		} else {
-		  text = "{{checkuser|" + text + "}}";
-		}
-		let value = await getParsedTemplateText(text);
-		let $new = $(value);
-		$(element).parent().prepend($new);
-		$(element).attr("style", "display:none");
-		if ($(element).attr("class") !== undefined) {
-			$new.find('.cuEntry .plainlinks:nth-child(1) a').addClass($(element).attr("class"));
-		}
-    });
-  }
-});
+ 	if (mw.config.get('wgPageName').startsWith('Category:Wikipedia_sockpuppets_of') || mw.config.get('wgPageName').startsWith('Category:Suspected_Wikipedia_sockpuppets_of')) {
+		$("div#mw-pages a[href^='/wiki/User:']").each(async function (index, element) {
+			let text = $(element).text().replace("User:", "");
+			if (mw.util.isIPAddress(text)) {
+				text = "{{checkip|" + text + "}}";
+			} else {
+				text = "{{checkuser|" + text + "}}";
+			}
+			let value = await getParsedTemplateText(text);
+			let $new = $(value);
+			$(element).parent().prepend($new);
+			$(element).attr("style", "display:none");
+			if ($(element).attr("class") !== undefined) {
+				$new.find('.cuEntry .plainlinks:nth-child(1) a').addClass($(element).attr("class"));
+			}
+    		});
+  	}
+.});
 });
 
 async function getParsedTemplateText(wikitext) {
