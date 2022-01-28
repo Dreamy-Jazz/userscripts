@@ -11,6 +11,6 @@
     "types-mediawiki": "^1.2.0"
   },
   "scripts": {
-    "test": "eslint spihelper.js"
+    "test": "eslint sockpuppet-category-helper.js"
   }
 }
